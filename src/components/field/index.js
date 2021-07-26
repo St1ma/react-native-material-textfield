@@ -648,6 +648,7 @@ export default class TextField extends PureComponent {
       errorColor,
       containerStyle,
       inputContainerStyle: inputContainerStyleOverrides,
+      inputStyle: inputStyleOverrides,
     } = this.props;
 
     let restricted = this.isRestricted();
@@ -711,7 +712,7 @@ export default class TextField extends PureComponent {
           <View style={styles.stack}>
             {this.renderLabel(styleProps)}
 
-            <View style={styles.row}>
+            <View style={[styles.row, inputStyleOverrides]}>
               {this.renderAffix('prefix')}
               {this.renderInput()}
               {this.renderAffix('suffix')}
