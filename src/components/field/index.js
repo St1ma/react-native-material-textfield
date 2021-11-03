@@ -63,6 +63,8 @@ export default class TextField extends PureComponent {
     disabledLineType: 'dotted',
 
     disabled: false,
+
+    renderInput: undefined,
   };
 
   static propTypes = {
@@ -119,6 +121,8 @@ export default class TextField extends PureComponent {
 
     containerStyle: (ViewPropTypes || View.propTypes).style,
     inputContainerStyle: (ViewPropTypes || View.propTypes).style,
+
+    renderInput: PropTypes.func,
   };
 
   static inputContainerStyle = styles.inputContainer;
@@ -609,10 +613,27 @@ export default class TextField extends PureComponent {
       editable,
       tintColor,
       style: inputStyleOverrides,
+      renderInput,
     } = this.props;
 
     let props = this.inputProps();
     let inputStyle = this.inputStyle();
+
+    if (renderInput && typeof renderInput === 'function') {
+      return renderInput({
+        selectionColor: tintColor,
+        ...props,
+        style: [styles.input, inputStyle, inputStyleOverrides],
+        editable: !disabled && editable,
+        onChange: this.onChange,
+        onChangeText: this.onChangeText,
+        onContentSizeChange: this.onContentSizeChange,
+        onFocus: this.onFocus,
+        onBlur: this.onBlur,
+        value: this.value(),
+        ref: this.inputRef,
+      })
+    }
 
     return (
       <TextInput
