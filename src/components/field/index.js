@@ -568,6 +568,7 @@ export default class TextField extends PureComponent {
       errorColor,
       titleTextStyle: style,
       characterRestriction: limit,
+      hideErrorMessage,
     } = this.props;
 
     let { length: count } = this.value();
@@ -598,6 +599,8 @@ export default class TextField extends PureComponent {
       disabled,
       focusAnimation,
     };
+
+    if (hideErrorMessage) return null;
 
     return (
       <View style={[styles.helperContainer, containerStyle]}>
