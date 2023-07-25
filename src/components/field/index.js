@@ -21,7 +21,7 @@ import styles from './styles';
 
 function startAnimation(animation, options, callback) {
   Animated
-    .timing(animation, { ...(options || {}), useNativeDriver: true })
+    .timing(animation, { ...(options || {}), useNativeDriver: false })
     .start(callback);
 }
 
@@ -87,9 +87,9 @@ export default class TextField extends PureComponent {
 
     labelOffset: Label.propTypes.offset,
 
-    labelTextStyle: Text.propTypes.style,
-    titleTextStyle: Text.propTypes.style,
-    affixTextStyle: Text.propTypes.style,
+    labelTextStyle: PropTypes.object,
+    titleTextStyle: PropTypes.object,
+    affixTextStyle: PropTypes.object,
 
     tintColor: PropTypes.string,
     textColor: PropTypes.string,
