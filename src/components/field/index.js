@@ -21,7 +21,7 @@ import styles from './styles';
 
 function startAnimation(animation, options, callback) {
   Animated
-    .timing(animation, options)
+    .timing(animation, { ...(options || {}), useNativeDriver: true })
     .start(callback);
 }
 

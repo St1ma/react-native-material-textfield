@@ -44,7 +44,10 @@ export default class Label extends PureComponent {
     }),
 
     style: Text.propType,
-    label: PropTypes.string,
+    label: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.object,
+    ]),
   };
 
   render() {
@@ -72,11 +75,11 @@ export default class Label extends PureComponent {
     let color = disabled ?
       baseColor :
       restricted ?
-        errorColor :
-        focusAnimation.interpolate({
-          inputRange: [-1, 0, 1],
-          outputRange: [errorColor, baseColor, tintColor],
-        });
+      errorColor :
+      focusAnimation.interpolate({
+        inputRange: [-1, 0, 1],
+        outputRange: [errorColor, baseColor, tintColor],
+      });
 
     let textStyle = {
       lineHeight: fontSize,
@@ -109,12 +112,16 @@ export default class Label extends PureComponent {
       }],
     };
 
-    return (
-      <Animated.View style={[styles.container, containerStyle]}>
-        <Animated.Text style={[styles.text, style, textStyle]} {...props}>
-          {label}
-        </Animated.Text>
-      </Animated.View>
+    return ( <
+      Animated.View style = {
+        [styles.container, containerStyle]
+      } >
+      <
+      Animated.Text style = {
+        [styles.text, style, textStyle]
+      } {...props } > { label } <
+      /Animated.Text> < /
+      Animated.View >
     );
   }
 }
